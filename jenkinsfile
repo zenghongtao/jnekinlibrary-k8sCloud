@@ -14,7 +14,7 @@ spec:
   containers:
     # node
     - name: jnlp-agent-node
-      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/inbound-agent:4.3-4
       imagePullPolicy: Always
       command:
         - cat
@@ -30,8 +30,6 @@ spec:
                     script {
                         sh """
                             sleep 30s
-                            node -v
-                            npm -v
                         """
                     }
                 }
