@@ -14,7 +14,7 @@ spec:
   containers:
     # node
     - name: jnlp-agent-node
-      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/inbound-agent:4.3-4
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
       imagePullPolicy: Always
       command:
         - cat
@@ -26,7 +26,7 @@ spec:
     stages {
         stage("Build") {
             steps {
-                container("node") {
+                container("jnlp-agent-node") {
                     script {
                         sh """
                             node -v
