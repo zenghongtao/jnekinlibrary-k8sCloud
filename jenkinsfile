@@ -13,8 +13,8 @@ spec:
     - name: aliyun-image
   containers:
     # node
-    - name: jnlp-agent-maven
-      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:latest
+    - name: jnlp-agent-node
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
       imagePullPolicy: Always
       command:
         - cat
@@ -26,7 +26,7 @@ spec:
     stages {
         stage("Build") {
             steps {
-                container("maven") {
+                container("node") {
                     script {
                         sh """
                             node -v
