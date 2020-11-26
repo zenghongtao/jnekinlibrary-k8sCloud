@@ -1,0 +1,40 @@
+pipeline{
+    agent{
+        kubernetes{
+            cloud "kubernetes"
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkinsagent
+  namespace: devops
+spec:
+  imagePullSecrets:
+    - name: aliyun-image
+  containers:
+    # node
+    - name: jnlp-agent-maven
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:latest
+      imagePullPolicy: Always
+      command:
+        - cat
+      tty: true
+      workingDir: /home/jenkins/agent
+"""
+        }
+    }
+    stages {
+        stage("Build") {
+            steps {
+                container("maven") {
+                    script {
+                        sh """
+                            node -v
+                            npm -v
+                        """
+                    }
+                }
+            }
+        }
+    }
+}
