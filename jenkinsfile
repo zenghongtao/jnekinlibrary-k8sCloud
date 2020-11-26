@@ -13,7 +13,7 @@ spec:
   containers:
     # node
     - name: jnlp
-      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/docker.io/jenkins/inbound-agent:4.3-4
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/inbound-agent:4.3-4
       imagePullPolicy: IfNotPresent
 """
         }
