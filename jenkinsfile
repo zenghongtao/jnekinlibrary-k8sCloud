@@ -30,6 +30,7 @@ spec:
                 container("node") {
                     script {
                         sh """
+                            sleep 30s
                             node -v
                             npm -v
                         """
