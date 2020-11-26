@@ -6,7 +6,7 @@ pipeline{
 apiVersion: v1
 kind: Pod
 metadata:
-  name: jenkinsagent
+  name: jnlp
   namespace: devops
 spec:
   imagePullSecrets:
