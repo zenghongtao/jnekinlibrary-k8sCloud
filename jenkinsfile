@@ -8,11 +8,15 @@ kind: Pod
 metadata:
   namespace: devops
 spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000 
   imagePullSecrets:
     - name: aliyun-image
   containers:
     # node
-    - name: jnlp
+    - name: jnlp-agent-node
       image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/inbound-agent:4.3-4
       imagePullPolicy: Always
       command:
@@ -25,7 +29,7 @@ spec:
     stages {
         stage("Build") {
             steps {
-                container("jnlp") {
+                container("jnlp-agent-node") {
                     script {
                         sh """
                             echo hi
