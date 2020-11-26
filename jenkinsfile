@@ -29,7 +29,7 @@ spec:
                 container("node") {
                     script {
                         sh """
-                            sleep 30s
+                            echo hi
                         """
                     }
                 }
