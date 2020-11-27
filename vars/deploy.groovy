@@ -49,7 +49,7 @@ void call() {
                     container("jnlp-agent-maven") {
                         script {
                             sh """
-                                mvn -v
+                                mvn clean package
                                 sleep 15s
                             """
                         }
