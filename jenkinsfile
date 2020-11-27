@@ -30,7 +30,7 @@ spec:
         }
     }
     stages {
-        stage("Build") {
+        stage("maven") {
             steps {
                 container("jnlp-agent-maven") {
                     script {
@@ -42,7 +42,7 @@ spec:
                 }
             }
         }
-        stage("Build") {
+        stage("node") {
             steps {
                 container("jnlp-agent-node") {
                     script {
