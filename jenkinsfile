@@ -13,7 +13,7 @@ spec:
   containers:
     # node
     - name: jnlp
-      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/inbound-agent:4.3-4
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:3.6.3
       imagePullPolicy: IfNotPresent
 """
         }
@@ -24,7 +24,7 @@ spec:
                 container("jnlp") {
                     script {
                         sh """
-                            echo hi
+                            mvn -v
                             sleep 30s
                         """
                     }
