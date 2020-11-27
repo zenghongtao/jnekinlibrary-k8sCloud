@@ -48,14 +48,14 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
+                            color.green("")
                             sh """
                                 mvn clean package
-                                sleep 15s
                             """
                         }
                     }
                 }
-            }            
+            }           
         }
     }
 
