@@ -47,6 +47,7 @@ spec:
                     script {
                         sh """
                             node -v
+                            npm -v
                             sleep 15s
                         """
                     }
