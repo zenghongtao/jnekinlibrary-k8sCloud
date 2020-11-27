@@ -21,13 +21,6 @@ void call() {
           command:
             - cat
           tty: true
-        # node
-        - name: jnlp-agent-node
-          image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
-          imagePullPolicy: IfNotPresent
-          command:
-            - cat
-          tty: true
     """
             }
         }
@@ -40,6 +33,14 @@ void call() {
         }
 
         stages {
+            stage('Git') {
+                steps {
+                    script {
+                        git.checkoutBranch()
+                    }
+                }
+            }
+
             stage("maven") {
                 steps {
                     container("jnlp-agent-maven") {
@@ -51,21 +52,7 @@ void call() {
                         }
                     }
                 }
-            }
-            
-            stage("node") {
-                steps {
-                    container("jnlp-agent-node") {
-                        script {
-                            sh """
-                                node -v
-                                npm -v
-                                sleep 15s
-                            """
-                        }
-                    }
-                }
-            }
+            }            
         }
     }
 
