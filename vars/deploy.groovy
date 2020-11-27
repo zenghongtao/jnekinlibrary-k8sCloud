@@ -1,8 +1,11 @@
 #!/usr/bin/env groovy
 import com.talebase.git
+import com.talebase.build
 
 void call() {
     Object git = new git()
+    Object build = new build()
+
     pipeline{
         agent {
             kubernetes {
@@ -36,7 +39,7 @@ void call() {
         }
 
         stages {
-            stage('Git') {
+            stage("git") {
                 steps {
                     script {
                         git.checkoutBranch()
@@ -48,14 +51,11 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            color.green("")
-                            sh """
-                                mvn clean package
-                            """
+                            build.mvn()
                         }
                     }
                 }
-            }           
+            }          
         }
     }
 
