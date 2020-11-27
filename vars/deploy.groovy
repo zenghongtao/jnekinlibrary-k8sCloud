@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+import com.talebase.git
 
 void call() {
     pipeline{
