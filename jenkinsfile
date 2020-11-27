@@ -18,7 +18,6 @@ spec:
       command:
         - cat
       tty: true
-  containers:
     # node
     - name: jnlp-agent-node
       image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
