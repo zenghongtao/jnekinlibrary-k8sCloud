@@ -11,7 +11,7 @@ spec:
   imagePullSecrets:
     - name: aliyun-image
   containers:
-    # node
+    # maven
     - name: jnlp-agent-maven
       image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:3.6.3
       imagePullPolicy: IfNotPresent
