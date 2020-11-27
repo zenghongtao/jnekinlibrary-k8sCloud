@@ -2,6 +2,7 @@
 import com.talebase.git
 
 void call() {
+    Object git = new git()
     pipeline{
         agent {
             kubernetes {
