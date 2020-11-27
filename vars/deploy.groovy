@@ -31,6 +31,14 @@ void call() {
     """
             }
         }
+
+        options {
+            disableConcurrentBuilds()
+            timeout(time: 1, unit: 'HOURS')
+            ansiColor('xterm')
+            buildDiscarder(logRotator(numToKeepStr: '10'))
+        }
+
         stages {
             stage("maven") {
                 steps {
@@ -44,6 +52,7 @@ void call() {
                     }
                 }
             }
+            
             stage("node") {
                 steps {
                     container("jnlp-agent-node") {
