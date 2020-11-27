@@ -12,20 +12,43 @@ spec:
     - name: aliyun-image
   containers:
     # node
-    - name: jnlp
+    - name: jnlp-agent-maven
       image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:3.6.3
       imagePullPolicy: IfNotPresent
+      command:
+        - cat
+      tty: true
+  containers:
+    # node
+    - name: jnlp-agent-node
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-node:15.3.0
+      imagePullPolicy: IfNotPresent
+      command:
+        - cat
+      tty: true
 """
         }
     }
     stages {
         stage("Build") {
             steps {
-                container("jnlp") {
+                container("jnlp-agent-maven") {
                     script {
                         sh """
                             mvn -v
-                            sleep 30s
+                            sleep 15s
+                        """
+                    }
+                }
+            }
+        }
+        stage("Build") {
+            steps {
+                container("jnlp-agent-node") {
+                    script {
+                        sh """
+                            node -v
+                            sleep 15s
                         """
                     }
                 }
