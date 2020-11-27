@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 package com.talebase
 
-void checkoutBranche() {
+void checkoutBranch() {
     color.green('>>>>>>>>>>>> Git Pull Config <<<<<<<<<<<<')
 
     try {      
