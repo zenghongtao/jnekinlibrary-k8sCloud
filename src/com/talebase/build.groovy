@@ -1,4 +1,4 @@
-package com.talebase.build
+package com.talebase
 
 void mvn() {
     
