@@ -51,7 +51,7 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            build.mvn()
+                            print("maven")
                         }
                     }
                 }
