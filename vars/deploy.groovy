@@ -55,8 +55,21 @@ void call() {
                         }
                     }
                 }
-            }          
+            }
+
+            stage("push images") {
+                steps {
+                    print("push images")
+                }
+            }
+
+            stage("deploy") {
+                steps {
+                    print("deploy")
+                }
+            }
         }
     }
 
 }
+
