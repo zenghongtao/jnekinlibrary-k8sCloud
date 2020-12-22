@@ -2,4 +2,4 @@
 
 library 'talebaseShareLib@master'
 
-deploy()
+javaDeploy()
