@@ -2,9 +2,9 @@
 
 library 'talebaseShareLib@master'
 
-def gitlab = new org.devops.gitlab()
-def jira = new org.devops.jira()
-def k8s = new org.devops.kubernetes()
+def gitlab = new com.talebase.gitlab()
+def jira = new com.talebase.jira()
+def k8s = new com.talebase.kubernetes()
 
 pipeline {
     agent { node { label "master"}}
