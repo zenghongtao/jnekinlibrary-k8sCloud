@@ -3,16 +3,16 @@ package com.talebase
 //封装HTTP请求
 def HttpReq(reqType,reqUrl,reqBody){
     def gitServer = "http://gitlab.cepin.com:9999/api/v4"
-    
-    result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "QqsxbLxvSZt4yp_P27xm"]], 
-              httpMode: reqType, 
-              contentType: "APPLICATION_JSON",
-              consoleLogResponseBody: true,
-              ignoreSslErrors: true, 
-              requestBody: reqBody,
-              url: "${gitServer}/${reqUrl}"
-              //quiet: true
-
+    withCredentials([string(credentialsId: '064dc95e-40f1-4c85-85ac-5203913a6f29', variable: 'gitlabToken')]) {
+      result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
+                httpMode: reqType, 
+                contentType: "APPLICATION_JSON",
+                consoleLogResponseBody: true,
+                ignoreSslErrors: true, 
+                requestBody: reqBody,
+                url: "${gitServer}/${reqUrl}"
+                //quiet: true
+    }
     return result
 }
 
