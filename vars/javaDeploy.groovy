@@ -67,7 +67,7 @@ void call() {
             disableConcurrentBuilds()
             timeout(time: 1, unit: 'HOURS')
             ansiColor('xterm')
-            buildDiscarder(logRotator(numToKeepStr: '5'))
+            buildDiscarder(logRotator(numToKeepStr: '10'))
         }
 
         stages {
@@ -76,6 +76,9 @@ void call() {
                     script {
                         // git.checkoutBranch()
                         println("git code")
+                        branch = ref - "refs/heads/"
+                        currentBuild.description = " Trigger by  ${userName} ${project}-${branch} "
+
                         response = readJSON text: """${webHookData}"""
                         println(response)
                     }
