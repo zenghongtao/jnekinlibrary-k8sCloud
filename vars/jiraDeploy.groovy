@@ -193,7 +193,7 @@ void call() {
                                 projectIds.add(projectId)   
                             } catch(e){
                                 println(e)
-                                currentBuild.description += "未获取到项目ID，请检查模块名称！"
+                                currentBuild.description += "\n 未获取到项目ID，请检查模块名称！"
                                 println("未获取到项目ID，请检查模块名称！")
                             }
                         } 
