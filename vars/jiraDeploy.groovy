@@ -10,7 +10,29 @@ void call() {
     pipeline {
         agent { node { label "master"}}
     
-    
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'webHookData', 
+                 value: '$',
+                 expressionType: 'JSONPath',
+                 regexpFilter: "",
+                 defaultValue: ''
+                ],                        
+            ],
+
+            genericRequestVariables:[
+                [key: 'projectKey']
+            ],
+
+            token: 'jira-devops-service',
+
+            causeString: 'Triggered on $webHookData',
+            printContributedVariables: false,
+            printPostContent: false,
+            silentResponse: false
+        )
+    }    
         stages{
         
             stage("FileterData"){
