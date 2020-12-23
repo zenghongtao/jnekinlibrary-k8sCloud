@@ -200,7 +200,7 @@ void call() {
                         println(projectIds)  
     
     
-                        if (fixVersion.size() == 0) {
+                        if (fixVersion.size() == 0 && moduleNames != []) {
                             for (id in projectIds){
                                 println("新建特性分支--> ${id} --> ${issueName}")
                                 currentBuild.description += "\n 新建特性分支--> ${id} --> ${issueName}"
