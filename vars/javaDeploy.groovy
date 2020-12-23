@@ -75,7 +75,7 @@ void call() {
                 steps {
                     script {
                         // git.checkoutBranch()
-                        color.green("git code")
+                        println("git code")
                         response = readJSON text: """${webHookData}"""
                         println(response)
                     }
@@ -86,7 +86,7 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            color.green("compile")
+                            println("compile")
                         }
                     }
                 }
@@ -94,7 +94,7 @@ void call() {
 
             stage("build images") {
                 steps {
-                    color.green("build images")
+                    println("build images")
                 }
             }
 
