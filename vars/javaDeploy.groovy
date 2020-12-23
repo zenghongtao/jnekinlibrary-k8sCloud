@@ -30,12 +30,38 @@ void call() {
             }
         }
 
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'ref', 
+                 value: '$.ref',
+                 expressionType: 'JSONPath',
+                 regexpFilter: "refs/heads/master",
+                 defaultValue: ''
+                ],
+                [key: 'project', value: '$.project.name'],
+                [key: 'userName', value: '$.user_name'],
+                [key: 'pinyinName', value: '$.user_username'],                         
+            ],
+
+            genericRequestVariables:[
+                [key: 'runOpts']
+            ],
+
+            token: 'release',
+
+            causeString: 'Triggered on $ref',
+            printContributedVariables: false,
+            printPostContent: false,
+            silentResponse: false
+        )
+    }
         options {
             timestamps()
             disableConcurrentBuilds()
             timeout(time: 1, unit: 'HOURS')
             ansiColor('xterm')
-            buildDiscarder(logRotator(numToKeepStr: '10'))
+            buildDiscarder(logRotator(numToKeepStr: '5'))
         }
 
         stages {
