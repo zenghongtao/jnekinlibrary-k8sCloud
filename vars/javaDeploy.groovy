@@ -33,12 +33,18 @@ void call() {
     triggers {
         GenericTrigger(
             genericVariables: [
+                [key: 'webHookData', 
+                 value: '$',
+                 expressionType: 'JSONPath',
+                 regexpFilter: "",
+                 defaultValue: ''
+                ],                 
                 [key: 'ref', 
                  value: '$.ref',
                  expressionType: 'JSONPath',
                  regexpFilter: "refs/heads/master",
                  defaultValue: ''
-                ],
+                ],               
                 [key: 'project', value: '$.project.name'],
                 [key: 'userName', value: '$.user_name'],
                 [key: 'pinyinName', value: '$.user_username'],                         
@@ -48,7 +54,7 @@ void call() {
                 [key: 'runOpts']
             ],
 
-            token: 'release',
+            token: 'gitlab-devops-service',
 
             causeString: 'Triggered on $ref',
             printContributedVariables: false,
@@ -68,24 +74,27 @@ void call() {
             stage("git") {
                 steps {
                     script {
-                        git.checkoutBranch()
+                        // git.checkoutBranch()
+                        color.green("git code")
+                        response = readJSON text: """${webHookData}"""
+                        println(response)
                     }
                 }
             }
 
-            stage("maven") {
+            stage("compile") {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            print("maven")
+                            color.green("compile")
                         }
                     }
                 }
             }
 
-            stage("push images") {
+            stage("build images") {
                 steps {
-                    print("push images")
+                    color.green("build images")
                 }
             }
 
