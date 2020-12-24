@@ -211,7 +211,8 @@ void call() {
                                 
                             
     
-                        } else if (fixVersion.size() != 0 && moduleNames != [] && status["name"] != "已完成") {
+                        } else if (fixVersion.size() != 0 && moduleNames != []) {
+                            println("--------------${status}-----------------")
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,Jenkins创建合并请求")
                             currentBuild.description += "\n Issue关联release操作,Jenkins创建合并请求 \n ${issueName} --> RELEASE-${fixVersion}" 
@@ -227,8 +228,6 @@ void call() {
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
                             }
-                        } else if (fixVersion.size() != 0 && moduleNames != [] && status["name"] == "已完成"){
-                            println("111111111")
                         }
                     }
                 }
