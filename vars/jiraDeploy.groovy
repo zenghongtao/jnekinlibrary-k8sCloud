@@ -239,8 +239,8 @@ void call() {
     
     
                                 
-                                println("创建合并请求 ${issueName} ---> STAG-${fixVersion}")
-                                gitlab.CreateMr(id,"${issueName}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
+                                println("创建合并请求 RELEASE-${fixVersion} ---> STAG-${fixVersion}")
+                                gitlab.CreateMr(id,"RELEASE-${fixVersion}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
                                 
                             }
                         }
