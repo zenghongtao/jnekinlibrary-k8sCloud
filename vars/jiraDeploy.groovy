@@ -213,8 +213,8 @@ void call() {
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
                             fixVersion = fixVersion[0]['name']
-                            println("Issue关联release操作,Jenkins创建合并请求")
-                            currentBuild.description += "\n Issue关联release操作,Jenkins创建合并请求 \n ${issueName} --> RELEASE-${fixVersion}" 
+                            println("Issue关联release操作,创建合并请求")
+                            currentBuild.description += "\n 创建合并请求 ${issueName} --> RELEASE-${fixVersion}" 
                             
                             for (id in projectIds){
                             
@@ -229,7 +229,20 @@ void call() {
                             }
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
                                 fixVersion = fixVersion[0]['name']
-                                currentBuild.description += "\n RELEASE-${fixVersion} 测试完成 " 
+                                println("测试点击Issue按钮")
+                                currentBuild.description += "\n RELEASE-${fixVersion} 测试完成 \n 创建合并请求 RELEASE-${fixVersion}--->STAG-${fixVersion}"
+
+                            for (id in projectIds){
+                            
+                                println("创建STAG-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","STAG-${fixVersion}")
+    
+    
+                                
+                                println("创建合并请求 ${issueName} ---> STAG-${fixVersion}")
+                                gitlab.CreateMr(id,"${issueName}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
+                                
+                            }
                         }
                     }
                 }
