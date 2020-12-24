@@ -230,8 +230,8 @@ void call() {
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
                                 fixVersion = fixVersion[0]['name']
                                 println("测试点击Issue按钮")
-                                currentBuild.description += "\n RELEASE-${fixVersion} 测试完成 \n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
-
+                                currentBuild.description += "\n RELEASE-${fixVersion} 测试完成"
+                                currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
                             for (id in projectIds){
                             
                                 println("创建STAG-->${id} -->${fixVersion}分支")
