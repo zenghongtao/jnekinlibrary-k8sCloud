@@ -227,7 +227,7 @@ void call() {
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
                             }
-                        } else if (fixVersion.size() != 0 && moduleNames != [] && status["name"] = "已完成"){
+                        } else if (fixVersion.size() != 0 && moduleNames != [] && status["name"] == "已完成"){
                             println("111111111")
                         }
                     }
