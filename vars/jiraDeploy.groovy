@@ -240,7 +240,7 @@ void call() {
     
                                 
                                 println("创建合并请求 ${issueName} ---> STAG-${fixVersion}")
-                                gitlab.CreateMr(id,"${issueName}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
+                                gitlab.CreateMr(id,"${issueName}","STAG-${fixVersion}","RELEASE-${fixVersion} to STAG-${fixVersion}")
                                 
                             }
                         }
