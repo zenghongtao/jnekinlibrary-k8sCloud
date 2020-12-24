@@ -226,10 +226,10 @@ void call() {
                                 println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
-                            } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
+                            }
+                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
                                 fixVersion = fixVersion[0]['name']
                                 currentBuild.description += "\n ${userName} RELEASE-${fixVersion} 测试完成 " 
-                            }
                         }
                     }
                 }
