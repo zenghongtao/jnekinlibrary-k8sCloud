@@ -212,7 +212,7 @@ void call() {
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != []) {
-                            println("--------------${status}-----------------")
+                            println(status[name])
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,Jenkins创建合并请求")
                             currentBuild.description += "\n Issue关联release操作,Jenkins创建合并请求 \n ${issueName} --> RELEASE-${fixVersion}" 
