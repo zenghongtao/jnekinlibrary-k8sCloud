@@ -214,7 +214,7 @@ void call() {
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,创建合并请求")
-                            currentBuild.description += "\n MR ${issueName} to RELEASE-${fixVersion}" 
+                            currentBuild.description += "\n 合并 RELEASE-${fixVersion} ---> STAG-${fixVersion}" 
                             
                             for (id in projectIds){
                             
@@ -231,7 +231,7 @@ void call() {
                                 fixVersion = fixVersion[0]['name']
                                 println("测试点击Issue按钮")
                                 currentBuild.description += "\n RELEASE-${fixVersion} 测试完成"
-                                currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
+                                currentBuild.description += "\n 合并 RELEASE-${fixVersion} ---> STAG-${fixVersion}"
                             for (id in projectIds){
                             
                                 println("创建STAG-->${id} -->${fixVersion}分支")
