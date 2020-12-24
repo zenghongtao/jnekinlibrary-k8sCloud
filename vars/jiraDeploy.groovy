@@ -63,6 +63,7 @@ void call() {
                                 env.userName = response['user']['name']
                                 env.moduleNames = response['issue']['fields']['components']
                                 env.fixVersion = response['issue']['fields']['fixVersions']
+                                env.status = response['issue']['fields']['status']
                                 currentBuild.description = " Trigger by ${userName} ${eventType} ${issueName} "
                                 break
                                 
@@ -226,7 +227,9 @@ void call() {
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
                             }
-                        } 
+                        } else if (fixVersion.size() != 0 && moduleNames != [], status["name"] = "已完成"){
+                            println("------------------"status["name"])
+                        }
                     }
                 }
             }
