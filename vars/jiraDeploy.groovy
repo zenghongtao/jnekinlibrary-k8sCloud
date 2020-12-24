@@ -202,7 +202,7 @@ void call() {
                         println(projectIds)  
     
     
-                        if (fixVersion.size() == 0 && moduleNames != []) {
+                        if (fixVersion.size() == 0 && moduleNames != [] && statu != '完成') {
                             for (id in projectIds){
                                 println("新建特性分支--> ${id} --> ${issueName}")
                                 currentBuild.description += "\n 新建特性分支--> ${id} --> ${issueName}"
@@ -211,8 +211,7 @@ void call() {
                                 
                             
     
-                        } else if (fixVersion.size() != 0 && moduleNames != []) {
-                            println(statu)
+                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,Jenkins创建合并请求")
                             currentBuild.description += "\n Issue关联release操作,Jenkins创建合并请求 \n ${issueName} --> RELEASE-${fixVersion}" 
@@ -227,6 +226,9 @@ void call() {
                                 println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
+                            } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
+                                fixVersion = fixVersion[0]['name']
+                                currentBuild.description += "\n ${userName} RELEASE-${fixVersion} 测试完成 " 
                             }
                         }
                     }
