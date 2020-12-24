@@ -228,7 +228,7 @@ void call() {
                                 
                             }
                         } else if (fixVersion.size() != 0 && moduleNames != [], status["name"] = "已完成"){
-                            println("------------------"status["name"])
+                            println("111111111")
                         }
                     }
                 }
