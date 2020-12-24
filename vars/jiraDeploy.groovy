@@ -63,7 +63,7 @@ void call() {
                                 env.userName = response['user']['name']
                                 env.moduleNames = response['issue']['fields']['components']
                                 env.fixVersion = response['issue']['fields']['fixVersions']
-                                env.status = response['issue']['fields']['status']
+                                env.statu = response['issue']['fields']['status']['name']
                                 currentBuild.description = " Trigger by ${userName} ${eventType} ${issueName} "
                                 break
                                 
@@ -212,7 +212,7 @@ void call() {
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != []) {
-                            println(status[name])
+                            println(statu)
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,Jenkins创建合并请求")
                             currentBuild.description += "\n Issue关联release操作,Jenkins创建合并请求 \n ${issueName} --> RELEASE-${fixVersion}" 
