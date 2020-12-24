@@ -25,7 +25,7 @@ void call() {
                 [key: 'projectKey']
             ],
 
-            token: 'jiraAndGitlabMR',
+            token: 'jira-devops-service',
 
             causeString: 'Triggered on $webHookData',
             printContributedVariables: false,
