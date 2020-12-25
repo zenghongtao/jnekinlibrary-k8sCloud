@@ -120,12 +120,12 @@ void call() {
                         //     for (component in issue["fields"]["components"] ){
                         //         issues[issue["key"]].add(component["name"])
                         //     }
+                        
+                        
+                        // }
+                        
+                        // println(issues)
                         println("HELLO")
-                        
-                        }
-                        
-                        println(issues)
-                        
                         
                         //搜索gitlab分支是否已合并然后删除
                         
