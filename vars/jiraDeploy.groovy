@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 import com.talebase.git
 import com.talebase.build
-import com.talebase.jira
 
 
 void call() {
