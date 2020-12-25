@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 import com.talebase.git
 import com.talebase.build
+import com.talebase.jira
+
 
 void call() {
     def gitlab = new com.talebase.gitlab()
@@ -244,7 +246,7 @@ void call() {
                                 
                             }
                         }
-                    }
+                    }                    
                 }
             }
         }
