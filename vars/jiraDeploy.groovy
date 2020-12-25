@@ -1,7 +1,4 @@
 #!/usr/bin/env groovy
-import com.talebase.git
-import com.talebase.build
-
 
 void call() {
     def gitlab = new com.talebase.gitlab()
