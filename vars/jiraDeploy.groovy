@@ -4,7 +4,6 @@
 void call() {
     def gitlab = new com.talebase.gitlab()
     def jira = new com.talebase.jira()
-    def test = new com.talebase.test()
     def k8s = new com.talebase.kubernetes()
 
     pipeline {
@@ -105,12 +104,13 @@ void call() {
                 
                 steps{
                     script{
-                        // //获取issuesName
-                        // println("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
-                        // response = jira.RunJql("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
-                        // 
-                        // response = readJSON text: """${response.content}"""
-                        // println(response)
+
+                        //获取issuesName
+                        println("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
+                        response = jira.RunJql("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
+                        
+                        response = readJSON text: """${response.content}"""
+                        println(response)
                         // issues = [:]
                         // for ( issue in response['issues']){
                         //     println(issue["key"])
@@ -125,7 +125,6 @@ void call() {
                         // }
                         
                         // println(issues)
-                        test.Hello()
                         
                         //搜索gitlab分支是否已合并然后删除
                         
