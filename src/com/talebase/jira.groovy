@@ -10,8 +10,8 @@ def HttpReq(reqType,reqUrl,reqBody){
             consoleLogResponseBody: true,
             ignoreSslErrors: true, 
             requestBody: reqBody,
-            url: "${apiServer}/${reqUrl}"
-            validResponseCodes: '200:404'
+            url: "${apiServer}/${reqUrl}",
+            validResponseCodes: '200:404',
             quiet: true
     return result
 }
