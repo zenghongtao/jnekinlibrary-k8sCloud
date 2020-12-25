@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+import com.talebase.jira.RunJql
 
 void call() {
     def gitlab = new com.talebase.gitlab()
@@ -105,7 +106,7 @@ void call() {
                     script{
                         //获取issuesName
                         println("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
-                        response = jira.RunJql("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
+                        response = new RunJql("project%20%3D%20${projectKey}%20AND%20fixVersion%20%3D%20${versionName}%20AND%20issuetype%20%3D%20Task")
                         
                         response = readJSON text: """${response.content}"""
                         println(response)
