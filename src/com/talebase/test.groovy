@@ -1,5 +1,5 @@
 package com.talebase
 
-def hello() {
+def Hello() {
     echo "hi"
 }
