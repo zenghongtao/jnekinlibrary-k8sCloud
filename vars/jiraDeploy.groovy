@@ -3,7 +3,7 @@ import com.talebase.jira.RunJql
 
 void call() {
     def gitlab = new com.talebase.gitlab()
-    def jira = new com.talebase.jira()
+    // def jira = new com.talebase.jira()
     def k8s = new com.talebase.kubernetes()
 
     pipeline {
