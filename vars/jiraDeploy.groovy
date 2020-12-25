@@ -120,8 +120,7 @@ void call() {
                         //     for (component in issue["fields"]["components"] ){
                         //         issues[issue["key"]].add(component["name"])
                         //     }
-                        
-                        
+                        //                       
                         // }
                         
                         // println(issues)
