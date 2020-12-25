@@ -2,7 +2,7 @@ package com.talebase
 
 //封装HTTP请求
 def HttpReq(reqType,reqUrl,reqBody){
-    def apiServer = "http://192.168.1.200:8050/rest/api/2"
+    def apiServer = "http://10.99.76.225:30085/rest/api/2"
    
    result = httpRequest authentication: 'jira-admin-user',
             httpMode: reqType, 
