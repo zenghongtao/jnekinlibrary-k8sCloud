@@ -11,7 +11,8 @@ def HttpReq(reqType,reqUrl,reqBody){
             ignoreSslErrors: true, 
             requestBody: reqBody,
             url: "${apiServer}/${reqUrl}"
-            //quiet: true
+            validResponseCodes: '200:404'
+            quiet: true
     return result
 }
 
