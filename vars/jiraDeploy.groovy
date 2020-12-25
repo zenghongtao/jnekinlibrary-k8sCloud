@@ -129,36 +129,35 @@ void call() {
                         //搜索gitlab分支是否已合并然后删除
                         
                         
-                        for (issue in issues.keySet()){
-                            for (projectName in issues[issue]){
-                                repoName = projectName.split("-")[0]
-                                projectId = gitlab.GetProjectID(repoName, projectName)
-                                
-                                try {
-                                    println("创建合并请求  RELEASE-${versionName}  ---> master")
-                                    result = gitlab.CreateMr(projectId,"RELEASE-${versionName}","master","RELEASE-${versionName}--->master")
-                                    result = readJSON text: """${result}"""
-                                    mergeId = result["iid"]
-                                    gitlab.AcceptMr(projectId,mergeId)
-                                    
-                                    sleep 15
-                                } catch(e){
-                                    println(e)
-                                }
-                                response = gitlab.SearchProjectBranches(projectId,issue)
-                                
-                                println(response[projectId][0]['merged'])
-                                
-                                if (response[projectId][0]['merged'] == false){
-                                    println("${projectName} --> ${issue} -->此分支未合并暂时忽略！")
-                                } else {
-                                    println("${projectName} --> ${issue} -->此分支已合并准备清理！")
-                                    gitlab.DeleteBranch(projectId,issue)
-                                }
-                            
-                            }
-    
-                        }
+                        // for (issue in issues.keySet()){
+                        //     for (projectName in issues[issue]){
+                        //         repoName = projectName.split("-")[0]
+                        //         projectId = gitlab.GetProjectID(repoName, projectName)
+                        //         
+                        //         try {
+                        //             println("创建合并请求  RELEASE-${versionName}  ---> master")
+                        //             result = gitlab.CreateMr(projectId,"RELEASE-${versionName}","master","RELEASE-${versionName}--->master")
+                        //             result = readJSON text: """${result}"""
+                        //             mergeId = result["iid"]
+                        //             gitlab.AcceptMr(projectId,mergeId)
+                        //             
+                        //             sleep 15
+                        //         } catch(e){
+                        //             println(e)
+                        //         }
+                        //         response = gitlab.SearchProjectBranches(projectId,issue)
+                        //         
+                        //         println(response[projectId][0]['merged'])
+                        //         
+                        //         if (response[projectId][0]['merged'] == false){
+                        //             println("${projectName} --> ${issue} -->此分支未合并暂时忽略！")
+                        //         } else {
+                        //             println("${projectName} --> ${issue} -->此分支已合并准备清理！")
+                        //             gitlab.DeleteBranch(projectId,issue)
+                        //         }
+                        //     
+                        //     }    
+                        // }
                     }
                 }
             }
