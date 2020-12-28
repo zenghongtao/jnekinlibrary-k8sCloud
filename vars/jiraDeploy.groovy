@@ -234,7 +234,7 @@ void call() {
                                 def branchesName = []
                                 branchesName = branches["name"]
                                 for (branchName in branchesName){
-                                    if (branchName.matches("compare-${issue_id}")){
+                                    if (branchName.matches("compare-${issue_id}*")){
                                         def compareBranch = branchName
                                         println(compareBranch)
                                     }                                        
