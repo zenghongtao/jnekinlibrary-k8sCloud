@@ -213,7 +213,7 @@ void call() {
                             env.short_id = commitsInfo["short_id"]                            
 
                         }
-                        def short_id = short_id.toString()
+                        // def short_id = short_id.toString()
 
                         println("获取当前 master short_id: ${short_id}")
 
@@ -254,8 +254,8 @@ void call() {
                                  }
                              }
                             //获取比较分支的 short_id
-                            def compareBranch = compareBranch.toString()
-                            short_id_compare = compareBranch.split["-"][1]
+                            // def compareBranch = compareBranch.toString()
+                            short_id_compare = compareBranch.split("-")[1]
                             println("比较分支的short_id: ${short_id_compare}")
 
 
