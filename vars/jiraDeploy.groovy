@@ -211,7 +211,9 @@ void call() {
 
 
                                 println("获取当前 master short_id")
-                                def short_id = gitlab.GetCommits(id)["short_id"]
+                                def response = gitlab.GetCommits(id)
+                                def commitsInfo = readJSON text: """${response}"""
+                                def short_id = commitsInfo["short_id"]
                                 println(short_id)
 
 
