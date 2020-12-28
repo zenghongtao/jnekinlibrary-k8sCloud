@@ -219,7 +219,7 @@ void call() {
 
                         if (fixVersion.size() == 0 && moduleNames != []) {
                             for (id in projectids){
-                                println(short_id)
+                                println("short_id")
 
 //                                 println("新建特性分支--> ${id} --> ${issueName}")
 //                                 currentBuild.description += "\n ${issueName}"
@@ -235,7 +235,7 @@ void call() {
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
-                            println(short_id)
+                            println("short_id")
 //                             for (id in projectids){
 //                                 //获取所有分支信息
 //                                 def branchesRes = gitlab.SearchBranches(id)
