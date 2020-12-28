@@ -213,6 +213,7 @@ void call() {
                             env.short_id = commitsInfo["short_id"]                            
 
                         }
+                        def short_id = short_id.toString()
 
                         println("获取当前 master short_id: ${short_id}")
 
