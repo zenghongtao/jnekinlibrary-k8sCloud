@@ -138,8 +138,8 @@ void call() {
                                 projectId = gitlab.GetProjectID(repoName, projectName)
                                 
                                 try {
-                                    println("创建合并请求  RELEASE-${versionName}  ---> master")
-                                    result = gitlab.CreateMr(projectId,"RELEASE-${versionName}","master","RELEASE-${versionName}--->master")
+                                    println("创建合并请求  release-${versionName}  ---> master")
+                                    result = gitlab.CreateMr(projectId,"release-${versionName}","master","release-${versionName}--->master")
                                     result = readJSON text: """${result}"""
                                     mergeId = result["iid"]
                                     gitlab.AcceptMr(projectId,mergeId)
@@ -214,13 +214,13 @@ void call() {
 
 
                                 println("新建特性分支--> ${id} --> ${issueName}")
-                                currentBuild.description += "\n feature ${issueName}"
+                                currentBuild.description += "\n ${issueName}"
                                 gitlab.CreateBranch(id,"master","${issueName}")
 
 
-                                println("新建比较分支--> ${id} --> master-${short_id}")
-                                currentBuild.description += "\n compare master-${issue_id}-${short_id}"
-                                gitlab.CreateBranch(id,"master","master-${issue_id}-${short_id}")
+                                println("新建比较分支--> ${id} --> compare-${short_id}")
+                                currentBuild.description += "\n compare-${issue_id}-${short_id}"
+                                gitlab.CreateBranch(id,"master","compare-${issue_id}-${short_id}")
                           
                             }
                                 
@@ -230,35 +230,35 @@ void call() {
 
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,创建合并请求")
-                            currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}" 
+                            currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
 
 
                             for (id in projectIds){
                             
-                                println("创建RELEASE-->${id} -->${fixVersion}分支")
-                                gitlab.CreateBranch(id,"master","RELEASE-${fixVersion}")
+                                println("创建release-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","release-${fixVersion}")
     
                                     
-                                println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
-                                gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
+                                println("创建合并请求 ${issueName} ---> release-${fixVersion}")
+                                gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
                                 
                             }
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
 
                             fixVersion = fixVersion[0]['name']
                             println("测试点击Issue按钮")
-                            currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
+                            currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}"
 
 
                             for (id in projectIds){
                             
-                                println("创建STAG-->${id} -->${fixVersion}分支")
-                                gitlab.CreateBranch(id,"master","STAG-${fixVersion}")
+                                println("创建stag-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","stag-${fixVersion}")
     
     
                                 
-                                println("创建合并请求 RELEASE-${fixVersion} ---> STAG-${fixVersion}")
-                                gitlab.CreateMr(id,"RELEASE-${fixVersion}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
+                                println("创建合并请求 release-${fixVersion} ---> stag-${fixVersion}")
+                                gitlab.CreateMr(id,"release-${fixVersion}","stag-${fixVersion}","release-${fixVersion}--->stag-${fixVersion}")
                                 
                             }
                         }
