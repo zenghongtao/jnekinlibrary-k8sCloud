@@ -133,3 +133,11 @@ def GetCommits(projectId) {
     
     return response
 }
+
+// 比较分支信息
+def CompareBranch(sourceBranch,destinationBranch){
+    def apiUrl = "/projects/:id/repository/compare?from=${sourceBranch}&to=${destinationBranch}"
+    response = HttpReq('GET',apiUrl,'').content
+
+    return response
+}

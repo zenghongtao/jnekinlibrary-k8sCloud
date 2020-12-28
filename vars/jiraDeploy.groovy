@@ -218,7 +218,8 @@ void call() {
 
                                 println("新建比较分支--> ${id} --> master-${short_id}")
                                 currentBuild.description += "\n diff-branch master-${short_id}"
-                                gitlab.CreateBranch(id,"master","master-${short_id}")                           
+                                gitlab.CreateBranch(id,"master","master-${short_id}")
+                          
                             }
                                 
                             
@@ -233,8 +234,7 @@ void call() {
                                 println("创建RELEASE-->${id} -->${fixVersion}分支")
                                 gitlab.CreateBranch(id,"master","RELEASE-${fixVersion}")
     
-    
-                                
+                                    
                                 println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
