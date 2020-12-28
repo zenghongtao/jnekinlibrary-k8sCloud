@@ -219,7 +219,10 @@ void call() {
                                 println("创建RELEASE-->${id} -->${fixVersion}分支")
                                 gitlab.CreateBranch(id,"master","RELEASE-${fixVersion}")
     
-    
+
+                                println("创建STAG-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","STAG-${fixVersion}")
+                                    
                                 
                                 println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
                                 gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
@@ -231,12 +234,7 @@ void call() {
                                 currentBuild.description += "\n RELEASE-${fixVersion} done"
                                 currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
                             for (id in projectIds){
-                            
-                                println("创建STAG-->${id} -->${fixVersion}分支")
-                                gitlab.CreateBranch(id,"master","STAG-${fixVersion}")
-    
-    
-                                
+                                                            
                                 println("创建合并请求 RELEASE-${fixVersion} ---> STAG-${fixVersion}")
                                 gitlab.CreateMr(id,"RELEASE-${fixVersion}","STAG-${fixVersion}","RELEASE-${fixVersion}--->STAG-${fixVersion}")
                                 
