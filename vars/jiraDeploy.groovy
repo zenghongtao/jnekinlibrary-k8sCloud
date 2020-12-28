@@ -245,7 +245,7 @@ void call() {
                             }
 
                             //获取比较分支的 short_id
-                            def short_id_compare = compareBranch.split["-"].[1]
+                            def short_id_compare = compareBranch.split["-"][1]
                             println("比较分支的short_id: ${short_id}")
                             
 
