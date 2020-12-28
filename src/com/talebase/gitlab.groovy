@@ -130,7 +130,7 @@ def AcceptMr(projectId,mergeId){
 def GetCommits(projectId) {
     def apiUrl = "projects/${projectId}/repository/commits/master"
     response = HttpReq('GET',apiUrl,'')
-    def commitsInfo = readJSON text: """${response}"""
+    // def commitsInfo = readJSON text: """${response}"""
 
-    println(commitsInfo)
+    println(response)
 }
