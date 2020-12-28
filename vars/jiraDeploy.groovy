@@ -247,13 +247,13 @@ void call() {
                                  branchesName = branches["name"]
                                  for (branchName in branchesName){
                                      if (branchName.endsWith("${issue_id}")){
-                                         def compareBranch = branchName
+                                         env.compareBranch = branchName
                                          println(compareBranch)
                                      }                                        
                                  }
                              }
                             //获取比较分支的 short_id
-                            env.short_id_compare = compareBranch.split["-"][1]
+                            short_id_compare = compareBranch.split["-"][1]
                             println("比较分支的short_id: ${short_id_compare}")
 
 
