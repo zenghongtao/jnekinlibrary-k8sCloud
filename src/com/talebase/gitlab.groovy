@@ -126,9 +126,9 @@ def AcceptMr(projectId,mergeId){
     HttpReq('PUT',apiUrl,'')
 }
 
-// 获取最新的 10 次 commit
+// 获取 master 提交信息
 def GetCommits(projectId) {
-    def apiUrl = "projects/${projectId}/repository/commits"
+    def apiUrl = "projects/${projectId}/repository/commits/master"
     response = HttpReq('GET',apiUrl,'')
     def commitsInfo = readJSON text: """${response}"""
 

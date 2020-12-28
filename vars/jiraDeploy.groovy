@@ -210,7 +210,7 @@ void call() {
                                 gitlab.CreateBranch(id,"master","${issueName}")
 
                                 println("获取提交信息")
-                                gitlab.GetCommits(id)                               
+                                gitlab.GetCommits(id)                             
                             }
                                 
                             
