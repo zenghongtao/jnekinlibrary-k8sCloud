@@ -263,12 +263,12 @@ void call() {
 
                                 for (ID in projectIds){
                             
-                                    println("创建release-->${id} -->${fixVersion}分支")
+                                    println("创建release-->${ID} -->${fixVersion}分支")
                                     gitlab.CreateBranch(id,"master","release-${fixVersion}")
     
                                     
                                     println("创建合并请求 ${issueName} ---> release-${fixVersion}")
-                                    gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
+                                    gitlab.CreateMr(ID,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
                                 
                                 }
                             }
