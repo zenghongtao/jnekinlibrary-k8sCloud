@@ -132,5 +132,5 @@ def GetCommits(projectId) {
     response = HttpReq('GET',apiUrl,'').content
     // def commitsInfo = readJSON text: """${response}"""
 
-    println(response)
+    println(response["short_id"])
 }
