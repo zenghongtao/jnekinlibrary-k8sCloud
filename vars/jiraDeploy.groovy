@@ -214,12 +214,11 @@ void call() {
                                 def response = gitlab.GetCommits(id)
                                 def commitsInfo = readJSON text: """${response}"""
                                 def short_id = commitsInfo["short_id"]
-                                println(short_id)
 
 
-                                // println("新建比较分支--> ${id} --> master-${short_id}")
-                                // currentBuild.description += "\n diff-branch master-${short_id}"
-                                // gitlab.CreateBranch(id,"master","master-${short_id}")                           
+                                println("新建比较分支--> ${id} --> master-${short_id}")
+                                currentBuild.description += "\n diff-branch master-${short_id}"
+                                gitlab.CreateBranch(id,"master","master-${short_id}")                           
                             }
                                 
                             
