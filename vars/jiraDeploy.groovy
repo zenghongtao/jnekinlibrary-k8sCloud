@@ -221,12 +221,22 @@ void call() {
                                 println("新建比较分支--> ${id} --> compare-${short_id}")
                                 currentBuild.description += "\n compare-${issue_id}-${short_id}"
                                 gitlab.CreateBranch(id,"master","compare-${issue_id}-${short_id}")
+
+
+                                def response = gitlab.SearchBranches(id)
+                                def branches = readJSON text: """${response}"""
+                                println(branches)                                
                           
                             }
                                 
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
+                            
+                            def response = gitlab.SearchBranches(id)
+                            def branches = readJSON text: """${response}"""
+                            println(branches)
+
 
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,创建合并请求")

@@ -120,6 +120,14 @@ def SearchProjectBranches(projectId,searchKey){
     }
 }
 
+//查找所有分支
+def SearchBranches(projectId){
+    def apiUrl = "projects/${projectId}/repository/branches"
+    response = HttpReq("GET",apiUrl,'').content
+
+    return response
+}
+
 //允许合并
 def AcceptMr(projectId,mergeId){
     def apiUrl = "projects/${projectId}/merge_requests/${mergeId}/merge"
