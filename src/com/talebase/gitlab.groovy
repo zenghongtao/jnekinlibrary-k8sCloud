@@ -11,7 +11,7 @@ def HttpReq(reqType,reqUrl,reqBody){
                 ignoreSslErrors: true, 
                 requestBody: reqBody,
                 url: "${gitServer}/${reqUrl}"
-                //quiet: true
+                quiet: true
     }
     return result
 }
