@@ -206,16 +206,16 @@ void call() {
     
 
                         // 获取master short_id
-                        for (id in projectIds){
+                        for (ID in projectIds){
 
-                            def commitRes = gitlab.GetCommits(id)
+                            def commitRes = gitlab.GetCommits(ID)
                             def commitsInfo = readJSON text: """${commitRes}"""
                             def short_id = commitsInfo["short_id"] 
                             println("获取当前 master short_id: ${short_id}")
 
                         }
 
-                        
+
                         if (fixVersion.size() == 0 && moduleNames != []) {
                             for (id in projectIds){
 
