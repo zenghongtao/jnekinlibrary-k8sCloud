@@ -219,9 +219,9 @@ void call() {
                                 gitlab.CreateBranch(id,"master","${issueName}")
 
 
-                                println("新建比较分支--> ${id} --> compare-${short_id}")
-                                currentBuild.description += "\n compare-${issue_id}-${short_id}"
-                                gitlab.CreateBranch(id,"master","compare-${issue_id}-${short_id}")
+                                println("新建比较分支--> ${id} --> compare-${short_id}-${issue_id}")
+                                currentBuild.description += "\n compare-${short_id}-${issue_id}"
+                                gitlab.CreateBranch(id,"master","compare-${short_id}-${issue_id}")
 
 
                                 //获取所有分支信息
@@ -234,7 +234,7 @@ void call() {
                                 def branchesName = []
                                 branchesName = branches["name"]
                                 for (branchName in branchesName){
-                                    if (branchName.matches("compare-${issue_id}*")){
+                                    if (branchName.endwith("${issue_id}")){
                                         def compareBranch = branchName
                                         println(compareBranch)
                                     }                                        
