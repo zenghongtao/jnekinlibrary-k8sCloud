@@ -52,6 +52,7 @@ void call() {
                                 break
     
                             case "jira:issue_created":
+                                env.issue_id = response['issue']['id']
                                 env.issueName = response['issue']['key']
                                 env.userName = response['user']['name']
                                 env.moduleNames = response['issue']['fields']['components']
@@ -218,7 +219,7 @@ void call() {
 
 
                                 println("新建比较分支--> ${id} --> master-${short_id}")
-                                currentBuild.description += "\n compare-branch master-${short_id}"
+                                currentBuild.description += "\n compare-branch master-${issue_id}-${short_id}"
                                 gitlab.CreateBranch(id,"master","master-${short_id}")
                           
                             }
