@@ -250,6 +250,7 @@ void call() {
                             
 
                             // 获取当前 master 的 short_id
+                            def id = ""
                             for (id in projectIds){
                                 def commitRes = gitlab.GetCommits(id)
                                 def commitsInfo = readJSON text: """${commitRes}"""
@@ -257,7 +258,7 @@ void call() {
                                 println("获取当前 master short_id")
                             }
 
-                            
+
                             if ("${short_id}" == "${short_id_compare}"){
                                 println("到目前为止，无 feature/hostfix 合入 master")
                                 fixVersion = fixVersion[0]['name']
