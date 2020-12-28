@@ -234,21 +234,22 @@ void call() {
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
 
-                            //获取所有分支信息
-                            def branchesRes = gitlab.SearchBranches(id)
-                            def branches = readJSON text: """${branchesRes}"""
+                            for (ID in projectIds){
+                                //获取所有分支信息
+                                def branchesRes = gitlab.SearchBranches(ID)
+                                def branches = readJSON text: """${branchesRes}"""
                             
 
-                            //遍历分支，获取compareBranch
-                            def branchesName = []
-                            branchesName = branches["name"]
-                            for (branchName in branchesName){
-                                if (branchName.endsWith("${issue_id}")){
-                                    def compareBranch = branchName
-                                    println(compareBranch)
-                                }                                        
+                                //遍历分支，获取compareBranch
+                                def branchesName = []
+                                branchesName = branches["name"]
+                                for (branchName in branchesName){
+                                    if (branchName.endsWith("${issue_id}")){
+                                        def compareBranch = branchName
+                                        println(compareBranch)
+                                    }                                        
+                                }
                             }
-
                             //获取比较分支的 short_id
                             def short_id_compare = compareBranch.split["-"][1]
                             println("比较分支的short_id: ${short_id_compare}")
