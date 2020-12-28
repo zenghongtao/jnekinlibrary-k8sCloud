@@ -225,7 +225,11 @@ void call() {
 
                                 def branchesRes = gitlab.SearchBranches(id)
                                 def branches = readJSON text: """${branchesRes}"""
-                                println(branches)                                
+                                println(branches)
+
+                                def branchesName = []
+                                branchesName = branches["name"]
+                                println(branchesName)                       
                           
                             }
                                 
