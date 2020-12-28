@@ -272,11 +272,8 @@ void call() {
                                     gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
                                 
                                 }
-                            }else if {
-
                             }
 
-                            
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
 
                             fixVersion = fixVersion[0]['name']
