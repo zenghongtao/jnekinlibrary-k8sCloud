@@ -208,8 +208,8 @@ void call() {
                             for (id in projectIds){
 
                                 println("获取当前 master short_id")
-                                def response = gitlab.GetCommits(id)
-                                def commitsInfo = readJSON text: """${response}"""
+                                def commitRes = gitlab.GetCommits(id)
+                                def commitsInfo = readJSON text: """${commitRes}"""
                                 def short_id = commitsInfo["short_id"]
 
 
@@ -223,8 +223,8 @@ void call() {
                                 gitlab.CreateBranch(id,"master","compare-${issue_id}-${short_id}")
 
 
-                                def response = gitlab.SearchBranches(id)
-                                def branches = readJSON text: """${response}"""
+                                def branchesRes = gitlab.SearchBranches(id)
+                                def branches = readJSON text: """${branchesRes}"""
                                 println(branches)                                
                           
                             }
