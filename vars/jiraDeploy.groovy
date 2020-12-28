@@ -61,6 +61,7 @@ void call() {
                                 break
     
                             case "jira:issue_updated":
+                                env.issue_id = response['issue']['id']
                                 env.issueName = response['issue']['key']
                                 env.userName = response['user']['name']
                                 env.moduleNames = response['issue']['fields']['components']
@@ -223,13 +224,21 @@ void call() {
                                 gitlab.CreateBranch(id,"master","compare-${issue_id}-${short_id}")
 
 
+                                //获取所有分支信息
                                 def branchesRes = gitlab.SearchBranches(id)
                                 def branches = readJSON text: """${branchesRes}"""
                                 println(branches)
 
+
+                                //遍历分支，获取compareBranch
                                 def branchesName = []
                                 branchesName = branches["name"]
-                                println(branchesName)                       
+                                for (branchName in branchesName){
+                                    if branchName.matches("compare-${issue_id}"){
+                                        def compareBranch = branchName
+                                        println(compareBranch)
+                                    }                                        
+                                }                       
                           
                             }
                                 
