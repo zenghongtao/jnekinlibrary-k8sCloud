@@ -256,7 +256,7 @@ void call() {
                             println("获取当前 master short_id")
 
                             if ("${short_id}" == "${short_id_compare}"){
-
+                                println("到目前为止，无 feature/hostfix 合入 master")
                                 fixVersion = fixVersion[0]['name']
                                 println("Issue关联release操作,创建合并请求")
                                 currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
