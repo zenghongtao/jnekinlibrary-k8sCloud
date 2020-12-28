@@ -261,7 +261,7 @@ void call() {
                                 currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
 
 
-                                for (id in projectIds){
+                                for (ID in projectIds){
                             
                                     println("创建release-->${id} -->${fixVersion}分支")
                                     gitlab.CreateBranch(id,"master","release-${fixVersion}")
