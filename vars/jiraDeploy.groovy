@@ -222,50 +222,61 @@ void call() {
                                 println("新建比较分支--> ${id} --> compare-${short_id}-${issue_id}")
                                 currentBuild.description += "\n compare-${short_id}-${issue_id}"
                                 gitlab.CreateBranch(id,"master","compare-${short_id}-${issue_id}")
-
-
-                                //获取所有分支信息
-                                def branchesRes = gitlab.SearchBranches(id)
-                                def branches = readJSON text: """${branchesRes}"""
-                                println(branches)
-
-
-                                //遍历分支，获取compareBranch
-                                def branchesName = []
-                                branchesName = branches["name"]
-                                for (branchName in branchesName){
-                                    if (branchName.endsWith("${issue_id}")){
-                                        def compareBranch = branchName
-                                        println(compareBranch)
-                                    }                                        
-                                }                       
                           
                             }
                                 
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
+
+                            //获取所有分支信息
+                            def branchesRes = gitlab.SearchBranches(id)
+                            def branches = readJSON text: """${branchesRes}"""
                             
-                            def response = gitlab.SearchBranches(id)
-                            def branches = readJSON text: """${response}"""
-                            println(branches)
 
+                            //遍历分支，获取compareBranch
+                            def branchesName = []
+                            branchesName = branches["name"]
+                            for (branchName in branchesName){
+                                if (branchName.endsWith("${issue_id}")){
+                                    def compareBranch = branchName
+                                    println(compareBranch)
+                                }                                        
+                            }
 
-                            fixVersion = fixVersion[0]['name']
-                            println("Issue关联release操作,创建合并请求")
-                            currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
-
-
-                            for (id in projectIds){
+                            //获取比较分支的 short_id
+                            def short_id_compare = compareBranch.split["-"].[1]
+                            println("比较分支的short_id: ${short_id}")
                             
-                                println("创建release-->${id} -->${fixVersion}分支")
-                                gitlab.CreateBranch(id,"master","release-${fixVersion}")
+
+                            // 获取当前 master 的 short_id
+                            def commitRes = gitlab.GetCommits(id)
+                            def commitsInfo = readJSON text: """${commitRes}"""
+                            def short_id = commitsInfo["short_id"]
+                            println("获取当前 master short_id")
+
+                            if ("${short_id}" == "${short_id_compare}"){
+
+                                fixVersion = fixVersion[0]['name']
+                                println("Issue关联release操作,创建合并请求")
+                                currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
+
+
+                                for (id in projectIds){
+                            
+                                    println("创建release-->${id} -->${fixVersion}分支")
+                                    gitlab.CreateBranch(id,"master","release-${fixVersion}")
     
                                     
-                                println("创建合并请求 ${issueName} ---> release-${fixVersion}")
-                                gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
+                                    println("创建合并请求 ${issueName} ---> release-${fixVersion}")
+                                    gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
                                 
+                                }
+                            }else if {
+
                             }
+
+                            
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
 
                             fixVersion = fixVersion[0]['name']
