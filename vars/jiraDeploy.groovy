@@ -219,6 +219,7 @@ void call() {
 
 
                                 println("新建比较分支--> ${id} --> master-${short_id}")
+                                println(issue_id)
                                 currentBuild.description += "\n compare-branch master-${issue_id}-${short_id}"
                                 gitlab.CreateBranch(id,"master","master-${short_id}")
                           
