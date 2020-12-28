@@ -211,7 +211,7 @@ void call() {
 
 
                                 println("获取当前 master short_id")
-                                short_id = gitlab.GetCommits(id)["short_id"]
+                                def short_id = gitlab.GetCommits(id)["short_id"]
 
 
                                 println("新建比较分支--> ${id} --> master-${short_id}")
