@@ -204,15 +204,15 @@ void call() {
     
                         println(projectIds)  
     
-    
+
+                        // 获取master short_id
+                        def commitRes = gitlab.GetCommits(id)
+                        def commitsInfo = readJSON text: """${commitRes}"""
+                        def short_id = commitsInfo["short_id"] 
+                        println("获取当前 master short_id: ${short_id}")
+
                         if (fixVersion.size() == 0 && moduleNames != []) {
                             for (id in projectIds){
-
-                                println("获取当前 master short_id")
-                                def commitRes = gitlab.GetCommits(id)
-                                def commitsInfo = readJSON text: """${commitRes}"""
-                                def short_id = commitsInfo["short_id"]
-
 
                                 println("新建特性分支--> ${id} --> ${issueName}")
                                 currentBuild.description += "\n ${issueName}"
@@ -247,16 +247,6 @@ void call() {
                             //获取比较分支的 short_id
                             def short_id_compare = compareBranch.split["-"][1]
                             println("比较分支的short_id: ${short_id}")
-                            
-
-                            // 获取当前 master 的 short_id
-                            def id = ""
-                            for (id in projectIds){
-                                def commitRes = gitlab.GetCommits(id)
-                                def commitsInfo = readJSON text: """${commitRes}"""
-                                def short_id = commitsInfo["short_id"]
-                                println("获取当前 master short_id")
-                            }
 
 
                             if ("${short_id}" == "${short_id_compare}"){
