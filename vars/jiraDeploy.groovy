@@ -218,7 +218,7 @@ void call() {
 
 
                                 println("新建比较分支--> ${id} --> master-${short_id}")
-                                currentBuild.description += "\n diff-branch master-${short_id}"
+                                currentBuild.description += "\n compare-branch master-${short_id}"
                                 gitlab.CreateBranch(id,"master","master-${short_id}")
                           
                             }
@@ -227,31 +227,28 @@ void call() {
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
 
-                            println("获取当前 master short_id")
-                            def response = gitlab.GetCommits(id)
-                            def commitsInfo = readJSON text: """${response}"""
-                            def short_id = commitsInfo["short_id"]
-
-
                             fixVersion = fixVersion[0]['name']
                             println("Issue关联release操作,创建合并请求")
                             currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}" 
-                            
+
+
                             for (id in projectIds){
                             
-                                println("创建RELEASE-->${id} -->${fixVersion}-${short_id}分支")
-                                gitlab.CreateBranch(id,"master","RELEASE-${fixVersion}-${short_id}")
+                                println("创建RELEASE-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","RELEASE-${fixVersion}")
     
                                     
-                                println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}-${short_id}")
-                                gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}-${short_id}","${issueName}--->RELEASE-${fixVersion}-${short_id}")
+                                println("创建合并请求 ${issueName} ---> RELEASE-${fixVersion}")
+                                gitlab.CreateMr(id,"${issueName}","RELEASE-${fixVersion}","${issueName}--->RELEASE-${fixVersion}")
                                 
                             }
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
-                                fixVersion = fixVersion[0]['name']
-                                println("测试点击Issue按钮")
-                                currentBuild.description += "\n RELEASE-${fixVersion} done"
-                                currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
+
+                            fixVersion = fixVersion[0]['name']
+                            println("测试点击Issue按钮")
+                            currentBuild.description += "\n MR RELEASE-${fixVersion} to STAG-${fixVersion}"
+
+
                             for (id in projectIds){
                             
                                 println("创建STAG-->${id} -->${fixVersion}分支")
