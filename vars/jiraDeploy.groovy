@@ -216,83 +216,83 @@ void call() {
                         }
 
 
-//                        if (fixVersion.size() == 0 && moduleNames != []) {
-//                            for (id in projectids){
-//
-//                                println("新建特性分支--> ${id} --> ${issueName}")
-//                                currentBuild.description += "\n ${issueName}"
-//                                gitlab.CreateBranch(id,"master","${issueName}")
-//
-//
-//                                println("新建比较分支--> ${id} --> compare-${short_id}-${issue_id}")
-//                                currentBuild.description += "\n compare-${short_id}-${issue_id}"
-//                                gitlab.CreateBranch(id,"master","compare-${short_id}-${issue_id}")
-//                          
-//                            }
-//                                
-//                            
-//    
-//                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
-//
-//                            for (id in projectids){
-//                                //获取所有分支信息
-//                                def branchesRes = gitlab.SearchBranches(id)
-//                                def branches = readJSON text: """${branchesRes}"""
-//                            
-//
-//                                //遍历分支，获取compareBranch
-//                                def branchesName = []
-//                                branchesName = branches["name"]
-//                                for (branchName in branchesName){
-//                                    if (branchName.endsWith("${issue_id}")){
-//                                        def compareBranch = branchName
-//                                        println(compareBranch)
-//                                    }                                        
-//                                }
-//                            }
-//                            //获取比较分支的 short_id
-//                            def short_id_compare = compareBranch.split["-"][1]
-//                            println("比较分支的short_id: ${short_id_compare}")
-//
-//
-//                            if ("${short_id}" == "${short_id_compare}"){
-//                                println("到目前为止，无 feature/hostfix 合入 master")
-//                                fixVersion = fixVersion[0]['name']
-//                                println("Issue关联release操作,创建合并请求")
-//                                currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
-//
-//
-//                                for (id in projectids){
-//                            
-//                                    println("创建release-->${id} -->${fixVersion}分支")
-//                                    gitlab.CreateBranch(id,"master","release-${fixVersion}")
-//    
-//                                    
-//                                    println("创建合并请求 ${issueName} ---> release-${fixVersion}")
-//                                    gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
-//                                
-//                                }
-//                            }
-//
-//                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
-//
-//                            fixVersion = fixVersion[0]['name']
-//                            println("测试点击Issue按钮")
-//                            currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}"
-//
-//
-//                            for (id in projectids){
-//                            
-//                                println("创建stag-->${id} -->${fixVersion}分支")
-//                                gitlab.CreateBranch(id,"master","stag-${fixVersion}")
-//    
-//    
-//                                
-//                                println("创建合并请求 release-${fixVersion} ---> stag-${fixVersion}")
-//                                gitlab.CreateMr(id,"release-${fixVersion}","stag-${fixVersion}","release-${fixVersion}--->stag-${fixVersion}")
-//                                
-//                            }
-//                        }
+                        if (fixVersion.size() == 0 && moduleNames != []) {
+                            for (id in projectids){
+
+                                println("新建特性分支--> ${id} --> ${issueName}")
+                                currentBuild.description += "\n ${issueName}"
+                                gitlab.CreateBranch(id,"master","${issueName}")
+
+
+                                println("新建比较分支--> ${id} --> compare-${short_id}-${issue_id}")
+                                currentBuild.description += "\n compare-${short_id}-${issue_id}"
+                                gitlab.CreateBranch(id,"master","compare-${short_id}-${issue_id}")
+                          
+                            }
+                                
+                            
+    
+                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
+
+                            for (id in projectids){
+                                //获取所有分支信息
+                                def branchesRes = gitlab.SearchBranches(id)
+                                def branches = readJSON text: """${branchesRes}"""
+                            
+
+                                //遍历分支，获取compareBranch
+                                def branchesName = []
+                                branchesName = branches["name"]
+                                for (branchName in branchesName){
+                                    if (branchName.endsWith("${issue_id}")){
+                                        def compareBranch = branchName
+                                        println(compareBranch)
+                                    }                                        
+                                }
+                            }
+                            //获取比较分支的 short_id
+                            def short_id_compare = compareBranch.split["-"][1]
+                            println("比较分支的short_id: ${short_id_compare}")
+
+
+                            if ("${short_id}" == "${short_id_compare}"){
+                                println("到目前为止，无 feature/hostfix 合入 master")
+                                fixVersion = fixVersion[0]['name']
+                                println("Issue关联release操作,创建合并请求")
+                                currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
+
+
+                                for (id in projectids){
+                            
+                                    println("创建release-->${id} -->${fixVersion}分支")
+                                    gitlab.CreateBranch(id,"master","release-${fixVersion}")
+    
+                                    
+                                    println("创建合并请求 ${issueName} ---> release-${fixVersion}")
+                                    gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
+                                
+                                }
+                            }
+
+                        } else if (fixVersion.size() != 0 && moduleNames != [] && statu == '完成'){
+
+                            fixVersion = fixVersion[0]['name']
+                            println("测试点击Issue按钮")
+                            currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}"
+
+
+                            for (id in projectids){
+                            
+                                println("创建stag-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","stag-${fixVersion}")
+    
+    
+                                
+                                println("创建合并请求 release-${fixVersion} ---> stag-${fixVersion}")
+                                gitlab.CreateMr(id,"release-${fixVersion}","stag-${fixVersion}","release-${fixVersion}--->stag-${fixVersion}")
+                                
+                            }
+                        }
                     }                    
                 }
             }
