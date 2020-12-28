@@ -125,3 +125,12 @@ def AcceptMr(projectId,mergeId){
     def apiUrl = "projects/${projectId}/merge_requests/${mergeId}/merge"
     HttpReq('PUT',apiUrl,'')
 }
+
+// 获取最新的 10 次 commit
+def GetCommits(projectId) {
+    def apiUrl = "projects/${projectId}/repository/commits"
+    response = HttpReq('GET',apiUrl,'')
+    def commitsInfo = readJSON text: """${response}"""
+
+    println(commitsInfo)
+}

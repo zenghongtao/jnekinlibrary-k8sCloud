@@ -208,6 +208,9 @@ void call() {
                                 println("新建特性分支--> ${id} --> ${issueName}")
                                 currentBuild.description += "\n feature ${issueName}"
                                 gitlab.CreateBranch(id,"master","${issueName}")
+
+                                println("获取提交信息")
+                                gitlab.GetCommits(id)                               
                             }
                                 
                             
