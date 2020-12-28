@@ -136,28 +136,28 @@ void call() {
                         for (issue in issues.keySet()){
                             for (projectName in issues[issue]){
                                 repoName = projectName.split("-")[0]
-                                projectId = gitlab.GetProjectID(repoName, projectName)
+                                projectid = gitlab.GetProjectid(repoName, projectName)
                                 
                                 try {
                                     println("创建合并请求  release-${versionName}  ---> master")
-                                    result = gitlab.CreateMr(projectId,"release-${versionName}","master","release-${versionName}--->master")
+                                    result = gitlab.CreateMr(projectid,"release-${versionName}","master","release-${versionName}--->master")
                                     result = readJSON text: """${result}"""
-                                    mergeId = result["iid"]
-                                    gitlab.AcceptMr(projectId,mergeId)
+                                    mergeid = result["iid"]
+                                    gitlab.AcceptMr(projectid,mergeid)
                                     
                                     sleep 15
                                 } catch(e){
                                     println(e)
                                 }
-                                response = gitlab.SearchProjectBranches(projectId,issue)
+                                response = gitlab.SearchProjectBranches(projectid,issue)
                                 
-                                println(response[projectId][0]['merged'])
+                                println(response[projectid][0]['merged'])
                                 
-                                if (response[projectId][0]['merged'] == false){
+                                if (response[projectid][0]['merged'] == false){
                                     println("${projectName} --> ${issue} -->此分支未合并暂时忽略！")
                                 } else {
                                     println("${projectName} --> ${issue} -->此分支已合并准备清理！")
-                                    gitlab.DeleteBranch(projectId,issue)
+                                    gitlab.DeleteBranch(projectid,issue)
                                 }
                             
                             }
@@ -178,12 +178,12 @@ void call() {
     
                 steps{
                     script{
-                        def projectIds = []
+                        def projectids = []
                         println(issueName)
                         fixVersion = readJSON text: """${fixVersion}"""
                         println(fixVersion.size())
     
-                        //获取项目Id
+                        //获取项目id
                         def projects = readJSON text: """${moduleNames}"""
                         for ( project in projects){
                             println(project["name"])
@@ -192,23 +192,23 @@ void call() {
                             repoName = projectName.split("-")[0]
                             
                             try {
-                                projectId = gitlab.GetProjectID(repoName, projectName)
-                                println(projectId)
-                                projectIds.add(projectId)   
+                                projectid = gitlab.GetProjectid(repoName, projectName)
+                                println(projectid)
+                                projectids.add(projectid)   
                             } catch(e){
                                 println(e)
-                                currentBuild.description += "\n 未获取到项目ID，请检查模块名称！"
-                                println("未获取到项目ID，请检查模块名称！")
+                                currentBuild.description += "\n 未获取到项目id，请检查模块名称！"
+                                println("未获取到项目id，请检查模块名称！")
                             }
                         } 
     
-                        println(projectIds)  
+                        println(projectids)  
     
 
                         // 获取master short_id
-                        for (ID in projectIds){
+                        for (id in projectids){
 
-                            def commitRes = gitlab.GetCommits(ID)
+                            def commitRes = gitlab.GetCommits(id)
                             def commitsInfo = readJSON text: """${commitRes}"""
                             def short_id = commitsInfo["short_id"] 
                             println("获取当前 master short_id: ${short_id}")
@@ -217,7 +217,7 @@ void call() {
 
 
                         if (fixVersion.size() == 0 && moduleNames != []) {
-                            for (id in projectIds){
+                            for (id in projectids){
 
                                 println("新建特性分支--> ${id} --> ${issueName}")
                                 currentBuild.description += "\n ${issueName}"
@@ -234,9 +234,9 @@ void call() {
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
 
-                            for (ID in projectIds){
+                            for (id in projectids){
                                 //获取所有分支信息
-                                def branchesRes = gitlab.SearchBranches(ID)
+                                def branchesRes = gitlab.SearchBranches(id)
                                 def branches = readJSON text: """${branchesRes}"""
                             
 
@@ -262,14 +262,14 @@ void call() {
                                 currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}" 
 
 
-                                for (ID in projectIds){
+                                for (id in projectids){
                             
-                                    println("创建release-->${ID} -->${fixVersion}分支")
-                                    gitlab.CreateBranch(ID,"master","release-${fixVersion}")
+                                    println("创建release-->${id} -->${fixVersion}分支")
+                                    gitlab.CreateBranch(id,"master","release-${fixVersion}")
     
                                     
                                     println("创建合并请求 ${issueName} ---> release-${fixVersion}")
-                                    gitlab.CreateMr(ID,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
+                                    gitlab.CreateMr(id,"${issueName}","release-${fixVersion}","${issueName}--->release-${fixVersion}")
                                 
                                 }
                             }
@@ -281,15 +281,15 @@ void call() {
                             currentBuild.description += "\n MR release-${fixVersion} to stag-${fixVersion}"
 
 
-                            for (ID in projectIds){
+                            for (id in projectids){
                             
-                                println("创建stag-->${ID} -->${fixVersion}分支")
-                                gitlab.CreateBranch(ID,"master","stag-${fixVersion}")
+                                println("创建stag-->${id} -->${fixVersion}分支")
+                                gitlab.CreateBranch(id,"master","stag-${fixVersion}")
     
     
                                 
                                 println("创建合并请求 release-${fixVersion} ---> stag-${fixVersion}")
-                                gitlab.CreateMr(ID,"release-${fixVersion}","stag-${fixVersion}","release-${fixVersion}--->stag-${fixVersion}")
+                                gitlab.CreateMr(id,"release-${fixVersion}","stag-${fixVersion}","release-${fixVersion}--->stag-${fixVersion}")
                                 
                             }
                         }
