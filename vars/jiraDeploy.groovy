@@ -213,7 +213,6 @@ void call() {
                             env.short_id = commitsInfo["short_id"]                            
 
                         }
-                        // def short_id = short_id.toString()
 
                         println("获取当前 master short_id: ${short_id}")
 
@@ -236,7 +235,7 @@ void call() {
                             
     
                         } else if (fixVersion.size() != 0 && moduleNames != [] && statu != '完成') {
-                            println(short_id)
+
                              for (id in projectids){
                                  //获取所有分支信息
                                  def branchesRes = gitlab.SearchBranches(id)
@@ -249,12 +248,12 @@ void call() {
                                  for (branchName in branchesName){
                                      if (branchName.endsWith("${issue_id}")){
                                          env.compareBranch = branchName
-                                         println(compareBranch)
                                      }                                        
                                  }
                              }
+
+                             
                             //获取比较分支的 short_id
-                            // def compareBranch = compareBranch.toString()
                             short_id_compare = compareBranch.split("-")[1]
                             println("比较分支的short_id: ${short_id_compare}")
 
