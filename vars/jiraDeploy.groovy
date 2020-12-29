@@ -219,7 +219,6 @@ void call() {
 
                         if (fixVersion.size() == 0 && moduleNames != []) {
                             for (id in projectids){
-                                println(short_id)
 
                                  println("新建特性分支--> ${id} --> ${issueName}")
                                  currentBuild.description += "\n ${issueName}"
@@ -252,7 +251,7 @@ void call() {
                                  }
                              }
 
-                             
+
                             //获取比较分支的 short_id
                             short_id_compare = compareBranch.split("-")[1]
                             println("比较分支的short_id: ${short_id_compare}")
