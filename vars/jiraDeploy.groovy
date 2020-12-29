@@ -252,6 +252,11 @@ void call() {
                              }
 
 
+                            // 比较分支
+                            def compareRes = gitlab.compareBranch("master",compareBranch)
+                            compareResJson = readJSON text: """${compareRes}"""
+                            println(compareResJson)
+
                             //获取比较分支的 short_id
                             short_id_compare = compareBranch.split("-")[1]
                             println("比较分支的short_id: ${short_id_compare}")
