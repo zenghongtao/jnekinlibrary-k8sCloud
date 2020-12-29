@@ -6,4 +6,10 @@ void mvn() {
     sh "mvn clean package"      
 }
 
+void dockerBuild(){
+    
+    color.green('>>>>>>>>>>>> Dokcer Build <<<<<<<<<<<<')
+    sh 'mvn docker:build'
+}
+
 
