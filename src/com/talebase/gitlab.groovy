@@ -10,7 +10,7 @@ def HttpReq(reqType,reqUrl,reqBody){
                 consoleLogResponseBody: true,
                 ignoreSslErrors: true, 
                 requestBody: reqBody,
-                url: "${gitServer}/${reqUrl}"
+                url: "${gitServer}/${reqUrl}",
                 quiet: true
     }
     return result
