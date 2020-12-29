@@ -253,7 +253,7 @@ void call() {
 
 
                             // 比较分支
-                            def compareRes = gitlab.compareBranch("master",compareBranch)
+                            def compareRes = gitlab.CompareBranch("master",compareBranch)
                             compareResJson = readJSON text: """${compareRes}"""
                             println(compareResJson)
 
