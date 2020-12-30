@@ -53,13 +53,9 @@ void call() {
             stage("git") {
                 steps {
                     script {
-                        // git.checkoutBranch()
                         println("git code")
                         branch = ref - "refs/heads/"
-                        currentBuild.description = " Trigger by  ${userName} ${project}-${branch} "
-
-                        response = readJSON text: """${webHookData}"""
-                        println(response)
+                        git.checkoutBranch(project,branch)
                     }
                 }
             }
@@ -68,21 +64,22 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            println("compile")
+                            build.mvn()
+                            dir("tds-service/tds-system"){
+                                build.dockerBuild()
+                            }
                         }
                     }
                 }
             }
 
-            stage("build images") {
-                steps {
-                    println("build images")
-                }
-            }
-
             stage("deploy") {
                 steps {
-                    print("deploy")
+                    sh """
+                        cd /data/tds_kaisa
+                        kubectl delete -f tds-system.yaml
+                        kubectl apply -f tds-system.yaml
+                    """
                 }
             }
         }
