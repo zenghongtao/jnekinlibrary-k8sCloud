@@ -35,7 +35,7 @@ spec:
         mountPath: /root/.m2
   volumes:
   - name: m2
-    persistenVolumeClaim:
+    persistentVolumeClaim:
       claimName: m2-pvc
 """
             }
