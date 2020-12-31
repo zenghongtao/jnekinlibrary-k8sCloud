@@ -26,13 +26,13 @@ spec:
       command:
         - cat
       tty: true
-    volumeMounts:
+      volumeMounts:
       - name: m2
         mountPath: /root/.m2
   volumes:
-    - name: m2
-      persistenVolumeClaim:
-        claimName: m2-pvc
+  - name: m2
+    persistenVolumeClaim:
+      claimName: m2-pvc
 """
             }
         }
