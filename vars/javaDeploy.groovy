@@ -7,8 +7,10 @@ void call() {
     Object build = new build()
 
     pipeline{
-            cloud "kubernetes"
-            yaml """
+        agent{
+            kubernetes {
+                cloud "kubernetes"
+                yaml """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -32,7 +34,8 @@ spec:
       persistenVolumeClaim:
         claimName: m2-pvc
 """
-
+            }
+        }
     triggers {
         GenericTrigger(
             genericVariables: [
