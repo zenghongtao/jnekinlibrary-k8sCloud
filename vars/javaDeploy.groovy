@@ -95,11 +95,10 @@ spec:
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            sh """mvn clean package"""
-                            // build.mvn()
-                            // dir("tds-service/tds-system"){
-                            //     build.dockerBuild()
-                            // }
+                            build.mvn()
+                            dir("tds-service/tds-system"){
+                                build.dockerBuild()
+                            }
                         }
                     }
                 }
