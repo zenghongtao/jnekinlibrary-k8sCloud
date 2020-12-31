@@ -33,7 +33,7 @@ void call() {
                 [key: 'runOpts']
             ],
 
-            token: 'gitlab-build-service',
+            token: 'gitlab-java-service',
 
             causeString: 'Triggered on $ref',
             printContributedVariables: false,
