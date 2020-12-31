@@ -64,10 +64,11 @@ void call() {
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                            build.mvn()
-                            dir("tds-service/tds-system"){
-                                build.dockerBuild()
-                            }
+                            sh """mvn clean package"""
+                            // build.mvn()
+                            // dir("tds-service/tds-system"){
+                            //     build.dockerBuild()
+                            // }
                         }
                     }
                 }
