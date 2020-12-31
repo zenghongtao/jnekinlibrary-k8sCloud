@@ -7,7 +7,31 @@ void call() {
     Object build = new build()
 
     pipeline{
-        agent any
+            cloud "kubernetes"
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: devops
+spec:
+  imagePullSecrets:
+    - name: aliyun-image
+  containers:
+    # maven
+    - name: jnlp-agent-maven
+      image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:3.6.3
+      imagePullPolicy: IfNotPresent
+      command:
+        - cat
+      tty: true
+    volumeMounts:
+      - name: m2
+        mountPath: /root/.m2
+  volumes:
+    - name: m2
+      persistenVolumeClaim:
+        claimName: m2-pvc
+"""
 
     triggers {
         GenericTrigger(
