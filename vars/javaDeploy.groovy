@@ -18,6 +18,10 @@ metadata:
 spec:
   imagePullSecrets:
     - name: aliyun-image
+  dnsPolicy: "None"
+  dnsConfig:
+    nameservers:
+      - 8.8.8.8
   containers:
     # maven
     - name: jnlp-agent-maven
