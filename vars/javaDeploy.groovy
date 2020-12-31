@@ -54,7 +54,7 @@ void call() {
                 steps {
                     script {
                         println("git code")
-                        branch = ref - "refs/heads/"
+                        branch = ref - "refs/heads/(master|tds_base)$"
                         git.checkoutBranch(project,branch)
                     }
                 }
