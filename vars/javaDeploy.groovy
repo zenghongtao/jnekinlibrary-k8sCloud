@@ -21,7 +21,7 @@ void call() {
                 [key: 'ref', 
                  value: '$.ref',
                  expressionType: 'JSONPath',
-                 regexpFilter: "refs/heads/master",
+                 regexpFilter: "refs/heads/(master|tds_base)$",
                  defaultValue: ''
                 ],               
                 [key: 'project', value: '$.project.name'],
@@ -54,7 +54,7 @@ void call() {
                 steps {
                     script {
                         println("git code")
-                        branch = ref - "refs/heads/(master|tds_base)$"
+                        branch = ref - "refs/heads/"
                         git.checkoutBranch(project,branch)
                     }
                 }
