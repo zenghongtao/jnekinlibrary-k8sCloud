@@ -21,7 +21,7 @@ void call() {
                 [key: 'ref', 
                  value: '$.ref',
                  expressionType: 'JSONPath',
-                 regexpFilter: "refs/heads/(master|tds_base)$",
+                 regexpFilter: "refs/heads/master",
                  defaultValue: ''
                 ],               
                 [key: 'project', value: '$.project.name'],
