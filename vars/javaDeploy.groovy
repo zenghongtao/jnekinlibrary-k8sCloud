@@ -39,6 +39,9 @@ spec:
       - name: docker
         mountPath: /usr/bin/docker
         subPath: docker
+      - name: dockerconfig
+        mountPath: /etc/sysconfig/docker
+        subPath: docker
   volumes:
   - name: m2
     persistentVolumeClaim:
@@ -49,6 +52,9 @@ spec:
   - name: docker
     hostPath:
       path: /usr/bin/
+  - name: dockerconfig
+    hostPath:
+      path: /etc/sysconfig/
 """
             }
         }
