@@ -42,7 +42,7 @@ spec:
       claimName: m2-pvc
   - name: docker
     hostPath:
-      path: /var/run/docker.sock
+      path: /var/run/
 """
             }
         }
