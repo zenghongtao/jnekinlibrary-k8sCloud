@@ -26,7 +26,7 @@ spec:
     # maven
     - name: jnlp-agent-maven
       image: registry.cn-hangzhou.aliyuncs.com/zenghongtao/jnlp-agent-maven:3.6.3
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
       command:
         - cat
       tty: true
@@ -38,9 +38,6 @@ spec:
         subPath: docker.sock
       - name: docker
         mountPath: /usr/bin/docker
-        subPath: docker
-      - name: dockerconfig
-        mountPath: /etc/sysconfig/docker
         subPath: docker
   volumes:
   - name: m2
