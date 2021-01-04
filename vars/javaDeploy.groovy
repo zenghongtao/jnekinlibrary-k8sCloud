@@ -33,7 +33,7 @@ spec:
       volumeMounts:
       - name: m2
         mountPath: /root/.m2
-      - name: dockerSock
+      - name: dockersock
         mountPath: /var/run/docker.sock
         subPath: docker.sock
       - name: docker
@@ -43,7 +43,7 @@ spec:
   - name: m2
     persistentVolumeClaim:
       claimName: m2-pvc
-  - name: dockerSock
+  - name: dockersock
     hostPath:
       path: /var/run/
   - name: docker
