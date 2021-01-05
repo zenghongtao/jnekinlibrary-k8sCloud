@@ -136,9 +136,7 @@ spec:
                 steps {
 
                     sh """
-                        cd envYaml/test
-                        kubectl delete -f tds-system.yaml
-                        kubectl apply -f tds-system.yaml
+                      pwd
                     """
                 }
             }
