@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tds-system
+  name: tds-system 
   #namespace: tds
   labels:
     app: tds-system
-spec:
+spec: 
   replicas: 1
   selector:
     matchLabels:
@@ -19,7 +19,7 @@ spec:
         runAsUser: 0
         fsGroup: 0
       containers:
-      - name: tds-system
+      - name: tds-system 
         image: 172.16.6.127:30000/base/tds-system:latest
         imagePullPolicy: Always
         args:
@@ -51,7 +51,7 @@ spec:
         hostPath:
           path: /usr/share/zoneinfo/Asia/Shanghai
       - name: timezone2
-        hostPath:
+        hostPath:      
           path: /etc/localtime
       - name: logpath
         persistentVolumeClaim:
@@ -59,6 +59,7 @@ spec:
       - name: filepath
         persistentVolumeClaim:
           claimName: tds-file-pvc
+
 ---
 #apiVersion: v1
 #kind: Service
