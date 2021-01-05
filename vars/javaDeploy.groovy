@@ -141,7 +141,7 @@ spec:
                 steps {
                     container("jnlp-agent-maven") {
                         script {
-                          sh "pwd"
+                          sh "kubectl get po"
                         }
                     }
                 }
