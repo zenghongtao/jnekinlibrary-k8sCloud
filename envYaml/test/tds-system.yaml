@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tds-system 
+  name: demo 
   #namespace: tds
   labels:
-    app: tds-system
+    app: demo
 spec: 
   replicas: 1
   selector:
     matchLabels:
-      app: tds-system
+      app: demo
   template:
     metadata:
       labels:
-        app: tds-system
+        app: demo
     spec:
       securityContext:
         runAsUser: 0
         fsGroup: 0
       containers:
-      - name: tds-system 
-        image: 172.16.6.127:30000/base/tds-system:latest
+      - name: demo 
+        image: 172.16.6.127:30000/base/demo:latest
         imagePullPolicy: Always
         args:
         - "--XX:MaxMetdspaceSize=256m"
@@ -64,9 +64,9 @@ spec:
 #apiVersion: v1
 #kind: Service
 #metadata:
-#  name: tds-system
+#  name: demo
 #  labels:
-#    app: tds-system
+#    app: demo
 #spec:
 #  type: NodePort
 #  ports:
@@ -74,4 +74,4 @@ spec:
 #    targetPort: 31902
 #    nodePort: 31902
 #  selector:
-#    app: tds-system
+#    app: demo
