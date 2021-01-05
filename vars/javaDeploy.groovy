@@ -80,7 +80,7 @@ spec:
                 [key: 'ref', 
                  value: '$.ref',
                  expressionType: 'JSONPath',
-                 regexpFilter: "refs/heads/master",
+                 regexpFilter: "refs/heads/dev3",
                  defaultValue: ''
                 ],               
                 [key: 'project', value: '$.project.name'],
