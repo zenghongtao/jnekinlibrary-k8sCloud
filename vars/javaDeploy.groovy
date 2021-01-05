@@ -134,10 +134,11 @@ spec:
 
             stage("deploy") {
                 steps {
-
-                    sh """
-                      pwd
-                    """
+                    container("jnlp-agent-maven") {
+                        script {
+                          sh "pwd"
+                        }
+                    }
                 }
             }
         }
