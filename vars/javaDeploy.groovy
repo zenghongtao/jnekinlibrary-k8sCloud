@@ -45,7 +45,7 @@ spec:
       - name: kubeconfig
         mountPath: /root/.kube
       - name: pki
-        mountPath: /etc/kubernetes/pki
+        mountPath: /etc/kubernetes/pki      
   volumes:
   - name: m2
     persistentVolumeClaim:
