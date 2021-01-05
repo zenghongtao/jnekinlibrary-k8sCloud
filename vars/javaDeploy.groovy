@@ -46,8 +46,6 @@ spec:
         mountPath: /root/.kube
       - name: pki
         mountPath: /etc/kubernetes/pki
-      - name: workspace
-        mountPath: /home/jenkins/agent/workspace
   volumes:
   - name: m2
     persistentVolumeClaim:
@@ -66,10 +64,7 @@ spec:
       claimName: kube-pvc
   - name: pki
     persistentVolumeClaim:
-      claimName: pki-pvc
-  - name: workspace
-    persistentVolumeClaim:
-      claimName: workspace-pvc      
+      claimName: pki-pvc     
 """
             }
         }
