@@ -44,8 +44,8 @@ spec:
         subPath: docker
       - name: kubeconfig
         mountPath: /root/.kube
-      - name: kubelet
-        mountPath: /var/lib/kubelet/pki
+      - name: pki
+        mountPath: /etc/kubernetes/pki
       - name: workspace
         mountPath: /home/jenkins/agent/workspace
   volumes:
@@ -64,9 +64,9 @@ spec:
   - name: kubeconfig
     persistentVolumeClaim:
       claimName: kube-pvc
-  - name: kubelet
+  - name: pki
     persistentVolumeClaim:
-      claimName: kubelet-pvc
+      claimName: pki-pvc
   - name: workspace
     persistentVolumeClaim:
       claimName: workspace-pvc      
