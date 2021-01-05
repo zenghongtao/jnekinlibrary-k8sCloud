@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tds-system
+  #namespace: tds
+  labels:
+    app: tds-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tds-system
+  template:
+    metadata:
+      labels:
+        app: tds-system
+    spec:
+      securityContext:
+        runAsUser: 0
+        fsGroup: 0
+      containers:
+      - name: tds-system
+        image: 172.16.6.127:30000/base/tds-system:latest
+        imagePullPolicy: Always
+        args:
+        - "--XX:MaxMetdspaceSize=256m"
+        - "--XX:MetdspaceSize=256m"
+        - "--spring.nacos.config.namespace=d88257aa-8d74-42c4-a49b-1558ac8e2157"
+        - "--server.port=31902"
+        - "--spring.nacos.server-addr=172.16.6.127:8848"
+        - "--spring.nacos.user-name=nacos"
+        - "--spring.nacos.password=nacos"
+        - "--spring.sentinel.dashboard=172.16.6.127:8847"
+        ports:
+        - containerPort: 31902
+#        #resources:
+#          #limits:
+#            #cpu: "2000m"
+#            #: "2048Mi"
+        volumeMounts:
+        - name: timezone1
+          mountPath: /usr/share/zoneinfo/Asia/Shanghai
+        - name: timezone2
+          mountPath: /etc/localtime
+        - name: logpath
+          mountPath: /data/tdslogs
+        - name: filepath
+          mountPath: /data/tdsfile
+      volumes:
+      - name: timezone1
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai
+      - name: timezone2
+        hostPath:
+          path: /etc/localtime
+      - name: logpath
+        persistentVolumeClaim:
+          claimName: tds-logs-pvc
+      - name: filepath
+        persistentVolumeClaim:
+          claimName: tds-file-pvc
+---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: tds-system
+#  labels:
+#    app: tds-system
+#spec:
+#  type: NodePort
+#  ports:
+#  - port: 31902
+#    targetPort: 31902
+#    nodePort: 31902
+#  selector:
+#    app: tds-system
