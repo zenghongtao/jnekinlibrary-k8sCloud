@@ -42,6 +42,10 @@ spec:
       - name: dockerconfig
         mountPath: /etc/sysconfig/docker
         subPath: docker
+      - name: kubeconfig
+        mountPath: /root/.kube
+      - name: kubelet
+        mountPath: /var/lib/kubelet/pki
   volumes:
   - name: m2
     persistentVolumeClaim:
@@ -55,6 +59,12 @@ spec:
   - name: dockerconfig
     hostPath:
       path: /etc/sysconfig/
+  - name: kubeconfig
+    persistentVolumeClaim:
+      claimName: kube-pvc
+  - name: kubelet
+    persistentVolumeClaim:
+      claimName: kubelet-pvc       
 """
             }
         }
@@ -124,8 +134,9 @@ spec:
 
             stage("deploy") {
                 steps {
+
                     sh """
-                        cd /data/tds_kaisa
+                        cd envYaml/test
                         kubectl delete -f tds-system.yaml
                         kubectl apply -f tds-system.yaml
                     """
