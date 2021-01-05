@@ -46,7 +46,6 @@ spec:
         mountPath: /root/.kube
       - name: kubelet
         mountPath: /var/lib/kubelet/pki
-        mountPath: /root/.workspace
       - name: workspace
         mountPath: /home/jenkins/agent/workspace
   volumes:
